@@ -1,0 +1,139 @@
+backend:
+  name: github
+  repo: Kodifly/kodifly-test
+  branch: master
+  
+media_folder: "src/assets/images/Blog/Blog"
+public_folder: /Blog
+local_backend: true
+
+media_library:
+  name: uploadcare
+  config:
+    publicKey: bda24a572397cf27b0dd
+
+collections:
+  - name: Blog Image
+    label: Blog Image
+    folder: src/markdown/blogs_image
+    identifier_field: Image_Title    
+    create: true
+    fields:
+      - { name: Image_Title, label: Image Title }
+      - { label: Main Page Image, name: mainPageImage, widget: image }
+      - { name: blog_image_date, label: Blog Image Date, widget: date }
+
+
+  - name: blog
+    label: Blog
+    folder: src/markdown/blogs
+    #slug: "{{year}}-{{month}}-{{day}}-{{blog_title}}" 
+    #identifier_field: blog_title
+    slug: "{{year}}-{{month}}-{{day}}-{{blog_title}}"
+    #preview_path: "blog/{{year}}-{{month}}-{{day}}-{{permalink}}/"
+    create: true
+    fields:
+      - { name: blog_date, label: Blog Date, widget: date }
+      - { name: blog_title, label: blog title }
+      - label: "Author"
+        name: "Author"
+        widget: "object"
+        fields:
+          - { name: author name, label: Author Name, widget: string } 
+          - { label: Author Image, name: authorImage, widget: image } 
+      - { name: blog description, label: Blog Description, widget: text } 
+      - label: Media
+        name: media
+        widget: image
+      - label: "Blog Body"
+        name: "Blog Body"
+        widget: "list"
+        min: 1
+        max: 4
+        fields: 
+          - {label: Title, name: Title } 
+          - {label: Blog Body Description, name: blog body description, widget: text } 
+          - label: "Blog Gallery"
+            name: "blogGalleryImages"
+            widget: "list"
+            summary: '{{fields.blog_image}}'
+            max: 4
+            fields: 
+              - {label: Blog Images, name: blog_image, widget: image, required: false}
+              - {label: "Alt Text", name: "alt",  widget: "string", required: false}
+      - {label: Search Tags, name: search_tags, widget: list, max: 1, min: 1 } 
+      - {label: Main Page Tags, name: mainPageTags, widget: list, default: ['term_1', 'term_2'], max: 3 } 
+
+
+  - name: Job
+    label: Job
+    folder: src/markdown/jobs
+    create: true
+    identifier_field: job_title
+    fields:
+      - { name: job_title, label: job title }
+      - label: "Job Roles"
+        name: "Job Roles"
+        widget: "select"
+        options: ["Business", "Frontend", "Backend"]
+      - label: "Job Type"
+        name: "Job Type"
+        widget: "select"
+        options: ["Remote", "Full Time", "Part Time"]
+      - {label: "Priority", name: "Priority", widget: boolean, default: false } ##
+      - label: "Job Location"
+        name: "Job Location"
+        widget: "object"
+        collapsed: true
+        fields: 
+          - {label: Country, name: country, widget: string, default: 'China' }
+          - {label: City, name: city, widget: string, default: 'Hong Kong' }
+      - { name: job_date, label: Job Date, widget: date, format: 'MM/DD/YYYY' }
+      - label: "Job Highlights"
+        name: "Job Highlights"
+        widget: "list"
+        min: 1
+        max: 5
+        field: {label: points, name: points, widget: string }
+      - { label: Job Description, name: job_description, widget: text }
+      - label: "Job Duties"
+        name: "job_duties"
+        widget: "list"
+        min: 1
+        max: 10
+        field: {label: duty points, name: duty points, widget: string }
+      - label: "Job Benefits"
+        name: "job benefits"
+        widget: "list"
+        min: 1
+        max: 5
+        field: {label: benefits points, name: benefits points, widget: string }
+      - { name: salary, label: Salary, widget: string, default: 'HK$ 15,000 - HK$ 32,000/month Bonuses available based on performance' }
+      - label: "Job Requirements"
+        name: "job requirements"
+        widget: "list"
+        min: 1
+        max: 10
+        field: {label: requirements points, name: requirements points, widget: string }
+      - { label: Place of Work, name: place of work, widget: string, default: 'Kwun Tong' }
+      - { label: Working Hours, name: working hours, widget: string, default: 'Monday to Friday, 9am - 6pm' }
+      - label: "Job Notes"
+        name: "job notes"
+        widget: "list"
+        min: 1
+        max: 20
+        field: {label: notes points, name: notes points, widget: text }
+      - { label: Apply Info, name: apply_info, widget: string, pattern: ['^[a-z0-9][-a-z0-9._]+@([kodifly]+\.)+[a-z]{2,5}$', "This field must contian only kodifly email"] }
+
+
+  - name: For_Code
+    label: For Code
+    folder: src/markdown/Code_MD
+    identifier_field: code_title
+    create: true
+    fields:
+      - { name: code_title, label: Code Title }
+      - label: 'Code'
+        name: 'code'
+        widget: 'code'
+        output_code_only: true
