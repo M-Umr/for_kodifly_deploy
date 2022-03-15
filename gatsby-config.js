@@ -10,7 +10,7 @@ module.exports = {
     `gatsby-plugin-sharp`, 
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
-    //`gatsby-plugin-netlify-cms`,
+    `gatsby-plugin-netlify-cms`,
     //`gatsby-transformer-remark`,
     //`gatsby-remark-images`,
     `gatsby-plugin-image`,
