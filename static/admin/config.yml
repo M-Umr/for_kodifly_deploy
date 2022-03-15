@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: Kodifly/kodifly-test
+  repo: M-Umr/for_kodifly_deploy
   branch: master
   
 media_folder: "src/assets/images/Blog/Blog"
